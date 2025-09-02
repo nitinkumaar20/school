@@ -1,16 +1,6 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import Link from "next/link";
-interface FormInputs {
-  name: string;
-  address: string;
-  city: string;
-  state: string;
-  contact: string;
-  email_id: string;
-  image: FileList;
-}
-
 
 export default function AddSchool() {
   const {
@@ -18,9 +8,9 @@ export default function AddSchool() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormInputs>();
+  } = useForm();
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+  const onSubmit = async (data) => {
     try {
       const formData = new FormData();
       formData.append("name", data.name);
@@ -44,7 +34,7 @@ export default function AddSchool() {
 
       Swal.fire("Success", "School added successfully!", "success");
       reset();
-    } catch (e: any) {
+    } catch (e) {
       Swal.fire("Error", e.message, "error");
     }
   };
@@ -53,7 +43,9 @@ export default function AddSchool() {
     <main className="container py-10">
       <div className="mb-4">
         <h1 className="font-bold text-xl hidden lg:block">Add School</h1>
-        <Link href="/" className="text-blue-600 hover:underline lg:hidden">← Back</Link>
+        <Link href="/" className="text-blue-600 hover:underline lg:hidden">
+          ← Back
+        </Link>
       </div>
       <div className="card max-w-2xl mx-auto">
         <h1 className="text-xl font-bold mb-4">Add School</h1>
@@ -170,7 +162,7 @@ export default function AddSchool() {
             />
             {errors.image && (
               <p className="text-red-600 text-sm mt-1">
-                {errors.image.message as string}
+                {errors.image.message}
               </p>
             )}
             <p className="text-xs text-gray-500 mt-1">
@@ -181,18 +173,6 @@ export default function AddSchool() {
           <button className="btn" disabled={isSubmitting} type="submit">
             {isSubmitting ? "Submitting..." : "Add School"}
           </button>
-
-          {/* {serverMsg && (
-            <div
-              className={`mt-3 rounded-lg p-3 ${
-                serverMsg.type === "success"
-                  ? "bg-green-50 text-green-700"
-                  : "bg-red-50 text-red-700"
-              }`}
-            >
-              {serverMsg.text}
-            </div>
-          )} */}
         </form>
       </div>
     </main>

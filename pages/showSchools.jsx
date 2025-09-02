@@ -1,21 +1,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
-interface School {
-  id: number;
-  name: string;
-  address: string;
-  city: string;
-  state: string;
-  contact: string;
-  image?: string | null;
-  email_id?: string;
-}
 
 export default function ShowSchools() {
-  const [schools, setSchools] = useState<School[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState<string>("");
+  const [schools, setSchools] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchSchools = async () => {
@@ -23,8 +13,8 @@ export default function ShowSchools() {
         const res = await fetch("/api/schools");
         const json = await res.json();
         if (!res.ok) throw new Error(json.error || "Failed to fetch");
-        setSchools(json.data as School[]);
-      } catch (e: any) {
+        setSchools(json.data);
+      } catch (e) {
         setError(e.message);
       } finally {
         setLoading(false);
@@ -42,8 +32,10 @@ export default function ShowSchools() {
   return (
     <main className="container py-10">
       <div className="mb-4 flex items-center justify-between">
-       <h1 className="font-bold text-xl hidden lg:block">Total Schools</h1>
- <Link href="/" className="text-blue-600 hover:underline lg:hidden">← Back</Link>
+        <h1 className="font-bold text-xl hidden lg:block">Total Schools</h1>
+        <Link href="/" className="text-blue-600 hover:underline lg:hidden">
+          ← Back
+        </Link>
       </div>
 
       {loading && <p>Loading schools...</p>}

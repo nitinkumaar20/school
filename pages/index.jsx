@@ -12,13 +12,9 @@ import AddSchool from "./addSchool";
 import ShowSchools from "./showSchools";
 import Mobile from "./Mobile";
 
-type Page = {
-  params: { page: string };
-};
-
 export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [page, setPage] = useState<Page>({ params: { page: "home" } });
+  const [page, setPage] = useState({ params: { page: "home" } });
 
   const renderPage = () => {
     switch (page.params.page) {
@@ -32,25 +28,24 @@ export default function AdminLayout() {
         return <AddSchool />;
       case "show":
         return <ShowSchools />;
-
       default:
         return <p>Page not found</p>;
     }
   };
 
   return (
-    <div className="">
+    <div>
       <div className="lg:flex h-screen overflow-hidden hidden">
         {/* Sidebar */}
         <div
           className={`transition-all duration-300 bg-gray-800 text-white ${
             sidebarOpen ? "w-64" : "w-16"
-          } `}
+          }`}
         >
           <div
-            className={` py-5 mb-4 text-center border-gray-500  font-bold text-2xl ${
+            className={`py-5 mb-4 text-center border-gray-500 font-bold text-2xl ${
               sidebarOpen ? "text-2xl" : "py-[16px] text-sm"
-            } border-b `}
+            } border-b`}
           >
             <h1>School</h1>
           </div>
@@ -113,15 +108,7 @@ export default function AdminLayout() {
   );
 }
 
-type SidebarItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  onClick: () => void;
-  open: boolean;
-  small?: boolean;
-};
-
-function SidebarItem({ icon, label, onClick, open, small }: SidebarItemProps) {
+function SidebarItem({ icon, label, onClick, open, small }) {
   return (
     <button
       onClick={onClick}
