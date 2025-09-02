@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS schooldb DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE schooldb;
+
+CREATE TABLE schools (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name TEXT NOT NULL,
+  address TEXT NOT NULL,
+  city TEXT NOT NULL,
+  state TEXT NOT NULL,
+  contact BIGINT NOT NULL,
+  image TEXT,
+  email_id TEXT NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

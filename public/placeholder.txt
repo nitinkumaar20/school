@@ -1,0 +1,1 @@
+Static files go here. Uploaded images will appear in /public/schoolImages.
