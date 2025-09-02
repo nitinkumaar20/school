@@ -1,4 +1,4 @@
-# Next.js + MySQL Schools (Assignment)
+# Next.js + MySQL Schools
 
 Two pages:
 - `/addSchool` — add a school using **react-hook-form**; image upload saved into `/public/schoolImages`.
@@ -6,6 +6,7 @@ Two pages:
 
 ## Tech
 - Next.js 14 (Pages Router)
+- TypeScript for frontend
 - MySQL (mysql2, connection pool)
 - API routes: `pages/api/schools`
 - Multipart upload: `next-connect` + `multer`
